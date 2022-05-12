@@ -17,7 +17,7 @@ const appError = (httpStatus, errMessage, next) => {
   next(error);
 };
 const errorResponder = (err, req, res, next) => {
-  res.status(500).json({
+  res.status(err.statusCode).json({
     err: err.message,
   });
 };
