@@ -20,10 +20,12 @@ router.get("/", async function (req, res, next) {
 });
 
 router.post("/", async function (req, res, next) {
+  // console.log("req.body", req.body);
   // query params
-  // if (req.body?.content == undefined) {
-  //   return next(appError(400, "你沒有填寫 content 資料", next));
-  // }
+  if (req.body.content == undefined) {
+    return next(appError(400, "你沒有填寫 content 資料", next));
+  }
+  console.log(req);
   try {
     const newPost = await Post.create(req.body);
     // res.send('<h1>1234</h1>');
@@ -33,7 +35,8 @@ router.post("/", async function (req, res, next) {
     });
   } catch (err) {
     // console.log(err);
-    next(appError(400, err.message, next));
+    // next(appError(400, err.message, next));
+    return next(err);
   }
 });
 
