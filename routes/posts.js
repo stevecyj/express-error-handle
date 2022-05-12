@@ -32,11 +32,8 @@ router.post("/", async function (req, res, next) {
       post: newPost,
     });
   } catch (err) {
-    console.log(err);
-    res.status(400).json({
-      status: "error",
-      message: err.message,
-    });
+    // console.log(err);
+    next(appError(400, err.message, next));
   }
 });
 
